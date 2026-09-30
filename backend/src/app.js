@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import urlRoutes from './routes/url.routes.js';
 
 const app = express();
 
@@ -15,5 +16,7 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.static('public'));
+
+app.use('/url', urlRoutes);
 
 export { app }
