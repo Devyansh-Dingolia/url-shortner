@@ -51,6 +51,32 @@ const createShortUrl = asyncHandler(async (req, res) => {
 
 });
 
+const redirectToOriginalUrl = asyncHandler(async (req, res) => {
+    const { shortCode } = req.params;
 
+    // Find the original URL by short code
+    const url = await Url.findOne({ shortCode });
 
-export { createShortUrl };
+    if (!url) {
+        return res
+            .status(404)
+            .send("<h1>404 - Short URL not found</h1>");
+    }
+
+    // Check if the URL has expired
+    if (url.expiresAt && new Date() > url.expiresAt) {
+        return res
+            .status(410)
+            .send("<h1>410 - Short URL has expired</h1>");
+    }
+
+    // Update click count and last clicked timestamp
+    url.clicks += 1;
+    url.lastClickedAt = new Date();
+    await url.save();
+
+    // Redirect to the original URL
+    res.redirect(url.originalUrl);
+});
+
+export { createShortUrl, redirectToOriginalUrl };
