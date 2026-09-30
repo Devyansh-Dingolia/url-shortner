@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Shortener - Stats</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="api.client.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">URL Shortener</a>
+    <div class="nav-links">
+      <a href="index.html">Shorten</a>
+      <a href="stats.html" class="active">Stats</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h1>Link Stats</h1>
+      <p class="subtitle">Paste a shortened URL to view its stats.</p>
+
+      <form id="stats-form">
+        <label for="short-url">Shortened URL</label>
+        <input
+          type="url"
+          id="short-url"
+          name="shortUrl"
+          placeholder="http://localhost:3000/url/abc123"
+          required
+        />
+        <button type="submit" id="stats-btn">Get Stats</button>
+      </form>
+
+      <p id="stats-error" class="error" hidden></p>
+
+      <div id="stats-result" hidden>
+        <table class="stats-table">
+          <tbody>
+            <tr>
+              <th>Original URL</th>
+              <td id="stat-original-url">-</td>
+            </tr>
+            <tr>
+              <th>Short URL</th>
+              <td id="stat-short-url">-</td>
+            </tr>
+            <tr>
+              <th>Short Code</th>
+              <td id="stat-short-code">-</td>
+            </tr>
+            <tr>
+              <th>Total Clicks</th>
+              <td id="stat-clicks">-</td>
+            </tr>
+            <tr>
+              <th>Created At</th>
+              <td id="stat-created-at">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

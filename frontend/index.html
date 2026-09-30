@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Shortener - Shorten</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="api.client.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">URL Shortener</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Shorten</a>
+      <a href="stats.html">Stats</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h1>Shorten a URL</h1>
+      <p class="subtitle">Paste your long URL below to get a short link.</p>
+
+      <form id="shorten-form">
+        <label for="original-url">Original URL</label>
+        <input
+          type="url"
+          id="original-url"
+          name="originalUrl"
+          placeholder="https://example.com/very/long/url"
+          required
+        />
+        <label for="expires-at">Expiry date (optional)</label>
+        <input
+          type="date"
+          id="expires-at"
+          name="expiresAt"
+        />
+        <button type="submit" id="shorten-btn">Shorten</button>
+      </form>
+
+      <p id="shorten-error" class="error" hidden></p>
+
+      <div id="shortened-result" class="result" hidden>
+        <span class="result-label">Shortened URL:</span>
+        <a id="shortened-url" href="#" target="_blank" rel="noopener noreferrer"></a>
+        <button id="copy-btn" type="button">Copy</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
