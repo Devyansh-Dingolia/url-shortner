@@ -79,4 +79,22 @@ const redirectToOriginalUrl = asyncHandler(async (req, res) => {
     res.redirect(url.originalUrl);
 });
 
-export { createShortUrl, redirectToOriginalUrl };
+const getUrlStats = asyncHandler(async (req, res) => {
+    const { shortCode } = req.body;
+
+    // Find the original URL by short code
+    const url = await Url.findOne({ shortCode });
+
+    if (!url) {
+        return res
+            .status(404)
+            .json(new ApiResponse(404, null, "Short URL not found"));
+    }
+
+    // Return the URL stats
+    res
+        .status(200)
+        .json(new ApiResponse(200, url, "URL stats retrieved successfully"));
+});
+
+export { createShortUrl, redirectToOriginalUrl, getUrlStats };
